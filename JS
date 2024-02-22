@@ -1,0 +1,37 @@
+document.getElementById('signInForm').addEventListener('submit', function(event) {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    if (!username || !password) {
+        alert('Username and password are required');
+        event.preventDefault();
+    }
+});
+
+document.getElementById('signUpForm').addEventListener('submit', function(event) {
+    const fullName = document.getElementById('fullName').value;
+    const email = document.getElementById('email').value;
+    const newPassword = document.getElementById('newPassword').value;
+
+    if (!fullName || !email || !newPassword) {
+        alert('All fields are required');
+        event.preventDefault();
+        return;
+    }
+
+    // Password validation (at least one number, one uppercase and one lowercase letter, one special character and at least 8 characters)
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[0-9a-zA-Z!@#$%^&*()_+]{8,}$/;
+    if (!passwordRegex.test(newPassword)) {
+        alert('Password must contain at least one number, one uppercase and one lowercase letter, one special character and at least 8 characters');
+        event.preventDefault();
+        return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('Invalid email format');
+        event.preventDefault();
+        return;
+    }
+});
